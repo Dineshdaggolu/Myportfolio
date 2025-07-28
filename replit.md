@@ -1,6 +1,14 @@
 # Project Overview
 
-This is a modern full-stack portfolio website built with React, Express.js, and styled with Tailwind CSS and shadcn/ui components. The application features a personal portfolio for Dinesh Daggolu, a B.Tech Computer Science student, with 3D graphics, interactive animations, and a contact form system.
+This is a modern full-stack portfolio website built with React, Express.js, PostgreSQL, and styled with Tailwind CSS and shadcn/ui components. The application features a personal portfolio for Dinesh Daggolu, a B.Tech Computer Science student, with 3D graphics, interactive animations, and a fully functional contact form with database storage.
+
+## Recent Changes (January 28, 2025)
+- ✓ Integrated PostgreSQL database using Neon hosting
+- ✓ Implemented DatabaseStorage class replacing MemStorage
+- ✓ Added contact form data persistence to database
+- ✓ Created admin dashboard at /admin route for viewing messages
+- ✓ Fixed TypeScript configuration issues for better compatibility
+- ✓ Set up complete full-stack architecture with database operations
 
 ## User Preferences
 
