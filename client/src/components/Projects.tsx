@@ -18,75 +18,75 @@ export default function Projects() {
   const projects: Project[] = [
     {
       title: "Python Data Analysis Tool",
-      description: "Comprehensive data analysis application using Python and pandas for processing large datasets, generating insights, and creating visualizations.",
+      description: "Currently developing a comprehensive data analysis application using Python and pandas for processing large datasets, generating insights, and creating visualizations. Working on implementing advanced statistical analysis features.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
         { name: "Pandas", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "Data Science", color: "bg-accent-green/20 text-accent-green" }
+        { name: "In Progress", color: "bg-yellow-500/20 text-yellow-500" }
       ],
       githubUrl: "https://github.com/dineshdag",
-      demoUrl: "https://demo.com"
+      demoUrl: "#"
     },
     {
       title: "Student Management System",
-      description: "Database-driven student management system with CRUD operations, built using Python and SQL for efficient data handling and retrieval.",
+      description: "Building a database-driven student management system with CRUD operations, using Python and SQL. Currently working on the user interface and advanced query optimization for efficient data handling.",
       image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
         { name: "SQL", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "DBMS", color: "bg-accent-green/20 text-accent-green" }
+        { name: "In Progress", color: "bg-yellow-500/20 text-yellow-500" }
       ],
       githubUrl: "https://github.com/dineshdag",
-      demoUrl: "https://demo.com"
+      demoUrl: "#"
     },
     {
       title: "Algorithm Visualizer",
-      description: "Interactive web application to visualize sorting algorithms and data structures, helping students understand complex algorithmic concepts.",
+      description: "Developing an interactive web application to visualize sorting algorithms and data structures. Currently implementing various sorting algorithms and working on the animation system to help students understand complex concepts.",
       image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
         { name: "Algorithms", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "Data Structures", color: "bg-accent-green/20 text-accent-green" }
+        { name: "In Progress", color: "bg-yellow-500/20 text-yellow-500" }
       ],
       githubUrl: "https://github.com/dineshdag",
-      demoUrl: "https://demo.com"
+      demoUrl: "#"
     },
     {
       title: "Personal Portfolio Website",
-      description: "Modern responsive portfolio website showcasing projects and skills, built with HTML, CSS, and enhanced with 3D animations.",
+      description: "Creating a modern responsive portfolio website showcasing projects and skills, built with HTML, CSS, and enhanced with 3D animations. Currently refining the design and adding interactive features.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "HTML", color: "bg-accent-cyan/20 text-accent-cyan" },
         { name: "CSS", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "JavaScript", color: "bg-accent-green/20 text-accent-green" }
+        { name: "In Progress", color: "bg-yellow-500/20 text-yellow-500" }
       ],
       githubUrl: "https://github.com/dineshdag",
-      demoUrl: "https://demo.com"
+      demoUrl: "#"
     },
     {
       title: "Python Automation Scripts",
-      description: "Collection of Python automation scripts for daily tasks including file organization, data processing, and system monitoring.",
+      description: "Working on a collection of Python automation scripts for daily tasks including file organization, data processing, and system monitoring. Currently developing scripts for automated report generation.",
       image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
         { name: "Automation", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "Scripts", color: "bg-accent-green/20 text-accent-green" }
+        { name: "In Progress", color: "bg-yellow-500/20 text-yellow-500" }
       ],
       githubUrl: "https://github.com/dineshdag",
-      demoUrl: "https://demo.com"
+      demoUrl: "#"
     },
     {
       title: "Database Design Project",
-      description: "Comprehensive database design project implementing normalized database schema with complex queries and stored procedures.",
+      description: "Implementing a comprehensive database design project with normalized database schema, complex queries, and stored procedures. Currently working on performance optimization and advanced query techniques.",
       image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "MySQL", color: "bg-accent-cyan/20 text-accent-cyan" },
         { name: "Database Design", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "SQL", color: "bg-accent-green/20 text-accent-green" }
+        { name: "In Progress", color: "bg-yellow-500/20 text-yellow-500" }
       ],
       githubUrl: "https://github.com/dineshdag",
-      demoUrl: "https://demo.com"
+      demoUrl: "#"
     }
   ];
 
@@ -99,7 +99,7 @@ export default function Projects() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          Featured Projects
+          Projects In Progress
         </motion.h2>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -143,14 +143,20 @@ export default function Projects() {
                   >
                     <i className="fab fa-github"></i> Code
                   </a>
-                  <a 
-                    href={project.demoUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-accent-cyan hover:text-accent-purple transition-colors"
-                  >
-                    <i className="fas fa-external-link-alt"></i> Demo
-                  </a>
+                  {project.demoUrl === "#" ? (
+                    <span className="text-text-muted cursor-not-allowed">
+                      <i className="fas fa-clock"></i> Coming Soon
+                    </span>
+                  ) : (
+                    <a 
+                      href={project.demoUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-accent-cyan hover:text-accent-purple transition-colors"
+                    >
+                      <i className="fas fa-external-link-alt"></i> Demo
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
