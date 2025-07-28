@@ -31,12 +31,7 @@ export default function About() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <p className="text-lg leading-relaxed text-text-light">
-              I'm a motivated B.Tech student at Vel Tech Rangarajan Dr. Sagunthala R&D Institute 
-              of Science and Technology (2023-2027) with a current CGPA of 8.592. I specialize in 
-              Python programming, Data Structures, DBMS, and Algorithms with a strong foundation 
-              in problem-solving and logical thinking.
-            </p>
+            <p className="text-lg leading-relaxed text-text-light">I'm a motivated B.Tech student at Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology (2023-2027) with a current CGPA of 8.792. I specialize in Python programming, Data Structures, DBMS, Frontend Developer and Algorithms with a strong foundation in problem-solving and logical thinking.</p>
             <p className="text-lg leading-relaxed text-text-light">
               I am eager to contribute to meaningful projects while advancing my knowledge in 
               software development, web technologies, and Android development. I have earned 
