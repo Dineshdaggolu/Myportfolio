@@ -16,15 +16,12 @@ export default function Home() {
       <Skills />
       <Projects />
       <Contact />
-      
       {/* Footer */}
       <footer className="py-12 bg-primary-dark/50">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <p className="text-text-muted">
-                © 2024 Dinesh Daggolu. Designed with passion and built with modern web technologies.
-              </p>
+              <p className="text-text-muted">© 2027 Dinesh Daggolu. Designed with passion and built with modern web technologies.</p>
             </div>
             <div className="flex space-x-6">
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent-cyan transition-colors">
