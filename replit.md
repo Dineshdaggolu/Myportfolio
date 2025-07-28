@@ -1,10 +1,18 @@
 # Project Overview
 
-This is a modern full-stack portfolio website built with React, Express.js, and styled with Tailwind CSS and shadcn/ui components. The application features a personal portfolio with 3D graphics, interactive animations, and a contact form system.
+This is a modern full-stack portfolio website built with React, Express.js, and styled with Tailwind CSS and shadcn/ui components. The application features a personal portfolio for Dinesh Daggolu, a B.Tech Computer Science student, with 3D graphics, interactive animations, and a contact form system.
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+## Personal Information (Dinesh Daggolu)
+- B.Tech student at Vel Tech Rangarajan Dr. Sagunthala R&D Institute of Science and Technology (2023-2027)
+- Current CGPA: 8.592
+- Location: Avadi, Chennai, Tamil Nadu
+- Contact: daggoludinesh@gmail.com, +91 9392798679
+- Specializes in Python programming, Data Structures, DBMS, and Algorithms
+- Certifications: Python (HackerRank), DBMS (Scalar), Python for Data Science (IBM), Python Programming (Skill India)
 
 ## System Architecture
 

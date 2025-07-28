@@ -29,37 +29,37 @@ export default function Skills() {
 
   const skillCategories: SkillCategory[] = [
     {
-      title: "Frontend Development",
+      title: "Programming Languages",
       icon: "fas fa-code",
       iconColor: "text-accent-cyan",
       skills: [
-        { name: "React.js", percentage: 90 },
-        { name: "JavaScript", percentage: 85 },
-        { name: "CSS/Tailwind", percentage: 88 }
+        { name: "Python", percentage: 90 },
+        { name: "HTML", percentage: 85 },
+        { name: "CSS", percentage: 80 }
       ],
-      description: "Experienced in building responsive, interactive web applications using modern frameworks and libraries. Passionate about creating seamless user experiences with clean, maintainable code."
+      description: "Strong foundation in Python programming with HackerRank certification. Experienced in web development using HTML and CSS for creating responsive and modern user interfaces."
     },
     {
-      title: "Backend Development",
-      icon: "fas fa-server",
+      title: "Data & Database",
+      icon: "fas fa-database",
       iconColor: "text-accent-purple",
       skills: [
-        { name: "Node.js", percentage: 82 },
-        { name: "Python", percentage: 87 },
-        { name: "Database", percentage: 80 }
+        { name: "DBMS", percentage: 85 },
+        { name: "Data Structures", percentage: 88 },
+        { name: "Python for Data Science", percentage: 80 }
       ],
-      description: "Proficient in server-side development, API design, and database management. Experience with cloud platforms and microservices architecture."
+      description: "Certified in Database Management Systems from Scalar. Strong understanding of data structures and algorithms. Completed IBM certification in Python for Data Science."
     },
     {
-      title: "Machine Learning",
+      title: "Core Skills",
       icon: "fas fa-brain",
       iconColor: "text-accent-green",
       skills: [
-        { name: "TensorFlow", percentage: 75 },
-        { name: "Scikit-learn", percentage: 78 },
-        { name: "Data Analysis", percentage: 83 }
+        { name: "Problem Solving", percentage: 90 },
+        { name: "Algorithms", percentage: 85 },
+        { name: "Creative Thinking", percentage: 80 }
       ],
-      description: "Passionate about artificial intelligence and machine learning. Experience with deep learning, data preprocessing, and model optimization techniques."
+      description: "Strong analytical and problem-solving abilities with logical thinking approach. Experienced in algorithmic problem solving and creative approach to technical challenges."
     }
   ];
 

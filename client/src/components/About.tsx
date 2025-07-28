@@ -32,15 +32,16 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p className="text-lg leading-relaxed text-text-light">
-              I'm a passionate Computer Science Engineering student with a deep fascination for 
-              cutting-edge technology and innovative problem-solving. My journey in programming 
-              started in high school and has evolved into a comprehensive skill set spanning 
-              multiple domains.
+              I'm a motivated B.Tech student at Vel Tech Rangarajan Dr. Sagunthala R&D Institute 
+              of Science and Technology (2023-2027) with a current CGPA of 8.592. I specialize in 
+              Python programming, Data Structures, DBMS, and Algorithms with a strong foundation 
+              in problem-solving and logical thinking.
             </p>
             <p className="text-lg leading-relaxed text-text-light">
-              Currently pursuing my degree while working on exciting projects that combine my 
-              interests in web development, artificial intelligence, and 3D graphics. I believe 
-              in continuous learning and staying at the forefront of technological advancement.
+              I am eager to contribute to meaningful projects while advancing my knowledge in 
+              software development, web technologies, and Android development. I have earned 
+              certifications in Python programming, Data Science from IBM, and Database Management 
+              Systems, demonstrating my commitment to continuous learning.
             </p>
             <div className="flex flex-wrap gap-4">
               {badges.map((badge, index) => (

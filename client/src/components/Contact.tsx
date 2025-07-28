@@ -62,19 +62,19 @@ export default function Contact() {
     {
       icon: "fas fa-envelope",
       title: "Email",
-      value: "alex.chen@university.edu",
+      value: "daggoludinesh@gmail.com",
       gradient: "from-accent-cyan to-accent-purple"
     },
     {
-      icon: "fab fa-linkedin",
-      title: "LinkedIn",
-      value: "linkedin.com/in/alexchen",
+      icon: "fas fa-phone",
+      title: "Phone",
+      value: "+91 9392798679",
       gradient: "from-accent-purple to-accent-green"
     },
     {
-      icon: "fab fa-github",
-      title: "GitHub",
-      value: "github.com/alexchen",
+      icon: "fas fa-map-marker-alt",
+      title: "Location",
+      value: "Avadi, Chennai, Tamil Nadu",
       gradient: "from-accent-green to-accent-cyan"
     }
   ];

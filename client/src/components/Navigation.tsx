@@ -46,7 +46,7 @@ export default function Navigation() {
             whileHover={{ scale: 1.05 }}
             onClick={() => scrollToSection('home')}
           >
-            Alex Chen
+            Dinesh Daggolu
           </motion.div>
           
           {/* Desktop Menu */}

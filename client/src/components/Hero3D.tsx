@@ -111,7 +111,7 @@ export default function Hero3D() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          Alex Chen
+          Dinesh Daggolu
         </motion.h1>
         
         <motion.p 
@@ -120,7 +120,7 @@ export default function Hero3D() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
         >
-          Computer Science Engineering Student
+          B.Tech Computer Science Student
         </motion.p>
         
         <motion.p 
@@ -129,8 +129,8 @@ export default function Hero3D() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          Passionate about creating innovative solutions through code. Specializing in web development, 
-          machine learning, and 3D graphics programming.
+          Motivated B.Tech student specializing in Python programming, Data Structures, DBMS and Algorithms, 
+          with a strong foundation in problem-solving and logical thinking.
         </motion.p>
         
         <motion.div 

@@ -17,75 +17,75 @@ export default function Projects() {
 
   const projects: Project[] = [
     {
-      title: "AI Data Visualizer",
-      description: "Interactive dashboard for visualizing complex datasets using machine learning algorithms and D3.js for dynamic chart generation.",
+      title: "Python Data Analysis Tool",
+      description: "Comprehensive data analysis application using Python and pandas for processing large datasets, generating insights, and creating visualizations.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
-        { name: "TensorFlow", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "D3.js", color: "bg-accent-green/20 text-accent-green" }
+        { name: "Pandas", color: "bg-accent-purple/20 text-accent-purple" },
+        { name: "Data Science", color: "bg-accent-green/20 text-accent-green" }
       ],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/dineshdag",
       demoUrl: "https://demo.com"
     },
     {
-      title: "3D Portfolio Engine",
-      description: "Web-based 3D portfolio platform built with Three.js, featuring interactive models, particle systems, and WebGL shaders.",
-      image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-      tags: [
-        { name: "Three.js", color: "bg-accent-cyan/20 text-accent-cyan" },
-        { name: "WebGL", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "React", color: "bg-accent-green/20 text-accent-green" }
-      ],
-      githubUrl: "https://github.com",
-      demoUrl: "https://demo.com"
-    },
-    {
-      title: "Crypto Trading Bot",
-      description: "Automated cryptocurrency trading system using machine learning for market prediction and real-time trading execution.",
-      image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      title: "Student Management System",
+      description: "Database-driven student management system with CRUD operations, built using Python and SQL for efficient data handling and retrieval.",
+      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
         { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
-        { name: "ML", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "APIs", color: "bg-accent-green/20 text-accent-green" }
+        { name: "SQL", color: "bg-accent-purple/20 text-accent-purple" },
+        { name: "DBMS", color: "bg-accent-green/20 text-accent-green" }
       ],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/dineshdag",
       demoUrl: "https://demo.com"
     },
     {
-      title: "Smart Campus App",
-      description: "Cross-platform mobile application for campus navigation, resource booking, and student collaboration with real-time updates.",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      title: "Algorithm Visualizer",
+      description: "Interactive web application to visualize sorting algorithms and data structures, helping students understand complex algorithmic concepts.",
+      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
-        { name: "React Native", color: "bg-accent-cyan/20 text-accent-cyan" },
-        { name: "Firebase", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "Maps API", color: "bg-accent-green/20 text-accent-green" }
+        { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
+        { name: "Algorithms", color: "bg-accent-purple/20 text-accent-purple" },
+        { name: "Data Structures", color: "bg-accent-green/20 text-accent-green" }
       ],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/dineshdag",
       demoUrl: "https://demo.com"
     },
     {
-      title: "IoT Monitoring System",
-      description: "Real-time IoT sensor monitoring dashboard with predictive analytics for environmental data collection and automated alerts.",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      title: "Personal Portfolio Website",
+      description: "Modern responsive portfolio website showcasing projects and skills, built with HTML, CSS, and enhanced with 3D animations.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
-        { name: "Arduino", color: "bg-accent-cyan/20 text-accent-cyan" },
-        { name: "MQTT", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "Node.js", color: "bg-accent-green/20 text-accent-green" }
+        { name: "HTML", color: "bg-accent-cyan/20 text-accent-cyan" },
+        { name: "CSS", color: "bg-accent-purple/20 text-accent-purple" },
+        { name: "JavaScript", color: "bg-accent-green/20 text-accent-green" }
       ],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/dineshdag",
       demoUrl: "https://demo.com"
     },
     {
-      title: "VR Learning Platform",
-      description: "Virtual reality educational platform for immersive learning experiences in science and engineering with multiplayer capabilities.",
-      image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      title: "Python Automation Scripts",
+      description: "Collection of Python automation scripts for daily tasks including file organization, data processing, and system monitoring.",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       tags: [
-        { name: "Unity", color: "bg-accent-cyan/20 text-accent-cyan" },
-        { name: "C#", color: "bg-accent-purple/20 text-accent-purple" },
-        { name: "VR SDK", color: "bg-accent-green/20 text-accent-green" }
+        { name: "Python", color: "bg-accent-cyan/20 text-accent-cyan" },
+        { name: "Automation", color: "bg-accent-purple/20 text-accent-purple" },
+        { name: "Scripts", color: "bg-accent-green/20 text-accent-green" }
       ],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/dineshdag",
+      demoUrl: "https://demo.com"
+    },
+    {
+      title: "Database Design Project",
+      description: "Comprehensive database design project implementing normalized database schema with complex queries and stored procedures.",
+      image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      tags: [
+        { name: "MySQL", color: "bg-accent-cyan/20 text-accent-cyan" },
+        { name: "Database Design", color: "bg-accent-purple/20 text-accent-purple" },
+        { name: "SQL", color: "bg-accent-green/20 text-accent-green" }
+      ],
+      githubUrl: "https://github.com/dineshdag",
       demoUrl: "https://demo.com"
     }
   ];
