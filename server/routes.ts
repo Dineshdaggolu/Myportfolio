@@ -21,7 +21,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const emailSent = await sendEmail({
           to: "daggoludinesh@gmail.com", // Your email address
           from: "daggoludinesh@gmail.com", // Use your verified email as sender
-          subject: `New Portfolio Contact: ${savedContact.subject}`,
+          subject: `🚀 New Portfolio Contact: ${savedContact.subject}`,
           text: emailContent.text,
           html: emailContent.html
         });
