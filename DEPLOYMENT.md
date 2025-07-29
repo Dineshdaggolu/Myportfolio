@@ -26,6 +26,9 @@ Your portfolio is **100% ready to deploy**. All configurations are set up for im
 2. **Deploy to Vercel**
    - Go to https://vercel.com
    - Connect your GitHub repository
+   - **Framework Preset**: Select "Vite"
+   - **Build Command**: `npm run build` (auto-detected)
+   - **Output Directory**: `dist` (auto-detected)
    - Add environment variable: `DATABASE_URL` (copy from .env.example)
    - Click Deploy
 
