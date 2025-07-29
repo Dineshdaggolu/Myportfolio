@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { z } from "zod";
 import { insertContactSchema } from "@shared/schema";
 import { storage } from "./storage";
+import { sendEmail, createContactNotificationEmail } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission endpoint
@@ -13,6 +14,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Save contact to database
       const savedContact = await storage.createContact(contactData);
       console.log("Contact form submission saved:", savedContact);
+      
+      // Send email notification to you
+      try {
+        const emailContent = createContactNotificationEmail(savedContact);
+        const emailSent = await sendEmail({
+          to: "daggoludinesh@gmail.com", // Your email address
+          from: "daggoludinesh@gmail.com", // Use your verified email as sender
+          subject: `New Portfolio Contact: ${savedContact.subject}`,
+          text: emailContent.text,
+          html: emailContent.html
+        });
+        
+        if (emailSent) {
+          console.log("Email notification sent successfully");
+        } else {
+          console.log("Failed to send email notification");
+        }
+      } catch (emailError) {
+        console.error("Email sending error:", emailError);
+        // Don't fail the contact form if email fails
+      }
       
       res.json({ 
         success: true, 
