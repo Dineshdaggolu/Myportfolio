@@ -1,0 +1,998 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen - CSE Student Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'sans': ['Space Grotesk', 'sans-serif'],
+                    'mono': ['JetBrains Mono', 'monospace'],
+                },
+                colors: {
+                    'primary': '#0F172A',
+                    'secondary': '#1E293B',
+                    'accent': '#06B6D4',
+                    'accent-purple': '#8B5CF6',
+                    'success': '#10B981',
+                    'text-light': '#F1F5F9',
+                    'text-muted': '#64748B',
+                }
+            }
+        }
+    };
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+
+        .hero-3d {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(3) {
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(180deg); }
+        }
+
+        .card-3d {
+            perspective: 1000px;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-3d:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            border: 1px solid #334155;
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
+            transform: rotateY(180deg);
+        }
+
+        .skill-progress {
+            background: linear-gradient(90deg, #06B6D4 0%, #8B5CF6 100%);
+            height: 8px;
+            border-radius: 4px;
+            transition: width 2s ease-in-out;
+        }
+
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .glass-morphism {
+            background: rgba(30, 41, 59, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-3d {
+            position: relative;
+            background: linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-3d:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-form {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .input-3d {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: #F1F5F9;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .input-3d:focus {
+            outline: none;
+            border-color: #06B6D4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #06B6D4 0%, #8B5CF6 100%);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-3d {
+                perspective: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-morphism">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-gradient">Alex Chen</div>
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="#home" class="hover:text-accent transition-colors duration-300">Home</a></li>
+                    <li><a href="#about" class="hover:text-accent transition-colors duration-300">About</a></li>
+                    <li><a href="#skills" class="hover:text-accent transition-colors duration-300">Skills</a></li>
+                    <li><a href="#projects" class="hover:text-accent transition-colors duration-300">Projects</a></li>
+                    <li><a href="#contact" class="hover:text-accent transition-colors duration-300">Contact</a></li>
+                </ul>
+                <div class="md:hidden">
+                    <button class="text-2xl"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center hero-3d relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="floating-element absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-accent to-accent-purple rounded-lg opacity-70"></div>
+            <div class="floating-element absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-accent-purple to-accent rounded-full opacity-60"></div>
+            <div class="floating-element absolute bottom-40 left-1/4 w-12 h-12 bg-gradient-to-br from-success to-accent rounded-lg opacity-50"></div>
+            
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 text-gradient" data-mock="true">Alex Chen</h1>
+            <p class="text-2xl md:text-3xl mb-4 text-text-muted">Computer Science Engineering Student</p>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto" data-mock="true">
+                Passionate about creating innovative solutions through code. Specializing in web development, 
+                machine learning, and 3D graphics programming.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#projects" class="btn-3d">View My Work</a>
+                <a href="#contact" class="btn-3d">Get In Touch</a>
+            </div>
+        </div>
+        
+        <!-- 3D Objects Container -->
+        <div id="three-container" class="absolute inset-0 z-0"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center text-gradient">About Me</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed" data-mock="true">
+                        I'm a passionate Computer Science Engineering student with a deep fascination for 
+                        cutting-edge technology and innovative problem-solving. My journey in programming 
+                        started in high school and has evolved into a comprehensive skill set spanning 
+                        multiple domains.
+                    </p>
+                    <p class="text-lg leading-relaxed" data-mock="true">
+                        Currently pursuing my degree while working on exciting projects that combine my 
+                        interests in web development, artificial intelligence, and 3D graphics. I believe 
+                        in continuous learning and staying at the forefront of technological advancement.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="px-4 py-2 bg-gradient-to-r from-accent to-accent-purple rounded-full text-sm font-medium">Problem Solver</span>
+                        <span class="px-4 py-2 bg-gradient-to-r from-accent-purple to-success rounded-full text-sm font-medium">Creative Thinker</span>
+                        <span class="px-4 py-2 bg-gradient-to-r from-success to-accent rounded-full text-sm font-medium">Team Player</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- Modern tech workspace setup -->
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+                         alt="Computer science student workspace" 
+                         class="rounded-xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-500" 
+                         data-mock-image="true" />
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-gradient-to-br from-accent to-accent-purple rounded-xl opacity-80 floating-element"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gradient-to-b from-transparent to-secondary/20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center text-gradient">Technical Skills</h2>
+            
+            <!-- Skills Categories -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Development -->
+                <div class="card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="text-center">
+                                <i class="fas fa-code text-4xl text-accent mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-4">Frontend Development</h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">React.js</span>
+                                            <span class="text-sm">90%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[90%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">JavaScript</span>
+                                            <span class="text-sm">85%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[85%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">CSS/Tailwind</span>
+                                            <span class="text-sm">88%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[88%]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-center h-full flex flex-col justify-center">
+                                <h3 class="text-xl font-semibold mb-4">Frontend Expertise</h3>
+                                <p class="text-sm" data-mock="true">
+                                    Experienced in building responsive, interactive web applications using 
+                                    modern frameworks and libraries. Passionate about creating seamless 
+                                    user experiences with clean, maintainable code.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Development -->
+                <div class="card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="text-center">
+                                <i class="fas fa-server text-4xl text-accent-purple mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-4">Backend Development</h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">Node.js</span>
+                                            <span class="text-sm">82%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[82%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">Python</span>
+                                            <span class="text-sm">87%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[87%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">Database</span>
+                                            <span class="text-sm">80%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[80%]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-center h-full flex flex-col justify-center">
+                                <h3 class="text-xl font-semibold mb-4">Backend Expertise</h3>
+                                <p class="text-sm" data-mock="true">
+                                    Proficient in server-side development, API design, and database 
+                                    management. Experience with cloud platforms and microservices 
+                                    architecture.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Machine Learning -->
+                <div class="card-3d">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="text-center">
+                                <i class="fas fa-brain text-4xl text-success mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-4">Machine Learning</h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">TensorFlow</span>
+                                            <span class="text-sm">75%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[75%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">Scikit-learn</span>
+                                            <span class="text-sm">78%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[78%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm">Data Analysis</span>
+                                            <span class="text-sm">83%</span>
+                                        </div>
+                                        <div class="w-full bg-secondary rounded-full h-2">
+                                            <div class="skill-progress w-[83%]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="text-center h-full flex flex-col justify-center">
+                                <h3 class="text-xl font-semibold mb-4">ML Expertise</h3>
+                                <p class="text-sm" data-mock="true">
+                                    Passionate about artificial intelligence and machine learning. 
+                                    Experience with deep learning, data preprocessing, and model 
+                                    optimization techniques.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center text-gradient">Featured Projects</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <!-- AI-powered data visualization dashboard -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="AI data visualization dashboard" 
+                         class="w-full h-48 object-cover"
+                         data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gradient" data-mock="true">AI Data Visualizer</h3>
+                        <p class="text-text-muted mb-4" data-mock="true">
+                            Interactive dashboard for visualizing complex datasets using machine learning 
+                            algorithms and D3.js for dynamic chart generation.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-accent/20 text-accent rounded text-sm">Python</span>
+                            <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-sm">TensorFlow</span>
+                            <span class="px-2 py-1 bg-success/20 text-success rounded text-sm">D3.js</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <!-- 3D web application interface -->
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="3D web application interface" 
+                         class="w-full h-48 object-cover"
+                         data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gradient" data-mock="true">3D Portfolio Engine</h3>
+                        <p class="text-text-muted mb-4" data-mock="true">
+                            Web-based 3D portfolio platform built with Three.js, featuring interactive 
+                            models, particle systems, and WebGL shaders.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-accent/20 text-accent rounded text-sm">Three.js</span>
+                            <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-sm">WebGL</span>
+                            <span class="px-2 py-1 bg-success/20 text-success rounded text-sm">React</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <!-- Blockchain cryptocurrency application -->
+                    <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Blockchain cryptocurrency application" 
+                         class="w-full h-48 object-cover"
+                         data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gradient" data-mock="true">Crypto Trading Bot</h3>
+                        <p class="text-text-muted mb-4" data-mock="true">
+                            Automated cryptocurrency trading system using machine learning for market 
+                            prediction and real-time trading execution.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-accent/20 text-accent rounded text-sm">Python</span>
+                            <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-sm">ML</span>
+                            <span class="px-2 py-1 bg-success/20 text-success rounded text-sm">APIs</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <!-- Mobile app development project -->
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Mobile app development project" 
+                         class="w-full h-48 object-cover"
+                         data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gradient" data-mock="true">Smart Campus App</h3>
+                        <p class="text-text-muted mb-4" data-mock="true">
+                            Cross-platform mobile application for campus navigation, resource booking, 
+                            and student collaboration with real-time updates.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-accent/20 text-accent rounded text-sm">React Native</span>
+                            <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-sm">Firebase</span>
+                            <span class="px-2 py-1 bg-success/20 text-success rounded text-sm">Maps API</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <!-- IoT sensor network dashboard -->
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="IoT sensor network dashboard" 
+                         class="w-full h-48 object-cover"
+                         data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gradient" data-mock="true">IoT Monitoring System</h3>
+                        <p class="text-text-muted mb-4" data-mock="true">
+                            Real-time IoT sensor monitoring dashboard with predictive analytics for 
+                            environmental data collection and automated alerts.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-accent/20 text-accent rounded text-sm">Arduino</span>
+                            <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-sm">MQTT</span>
+                            <span class="px-2 py-1 bg-success/20 text-success rounded text-sm">Node.js</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <!-- Game development project -->
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400" 
+                         alt="Game development project" 
+                         class="w-full h-48 object-cover"
+                         data-mock-image="true" />
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gradient" data-mock="true">VR Learning Platform</h3>
+                        <p class="text-text-muted mb-4" data-mock="true">
+                            Virtual reality educational platform for immersive learning experiences 
+                            in science and engineering with multiplayer capabilities.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-accent/20 text-accent rounded text-sm">Unity</span>
+                            <span class="px-2 py-1 bg-accent-purple/20 text-accent-purple rounded text-sm">C#</span>
+                            <span class="px-2 py-1 bg-success/20 text-success rounded text-sm">VR SDK</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="#" class="text-accent hover:text-accent-purple transition-colors">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-transparent to-secondary/20">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center text-gradient">Get In Touch</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-gradient">Let's Connect</h3>
+                        <p class="text-lg text-text-muted leading-relaxed" data-mock="true">
+                            I'm always excited to discuss new opportunities, collaborate on interesting 
+                            projects, or simply connect with fellow developers. Feel free to reach out!
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-purple rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-text-muted" data-mock="true">alex.chen@university.edu</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-accent-purple to-success rounded-lg flex items-center justify-center">
+                                <i class="fab fa-linkedin text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">LinkedIn</h4>
+                                <p class="text-text-muted" data-mock="true">linkedin.com/in/alexchen</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-success to-accent rounded-lg flex items-center justify-center">
+                                <i class="fab fa-github text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">GitHub</h4>
+                                <p class="text-text-muted" data-mock="true">github.com/alexchen</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="input-3d" placeholder="Your Name" data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="input-3d" placeholder="your.email@example.com" data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="input-3d" placeholder="What's this about?" data-mock="true">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="input-3d resize-none" placeholder="Your message here..." data-mock="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-3d w-full" data-event="click:handleSubmit">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-primary/50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-text-muted" data-mock="true">
+                        © 2024 Alex Chen. Designed with passion and built with modern web technologies.
+                    </p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-text-muted hover:text-accent transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-text-muted hover:text-accent transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-text-muted hover:text-accent transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-text-muted hover:text-accent transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Particle System
+            let scene, camera, renderer, particles;
+            let particleGeometry, particleMaterial, particleSystem;
+
+            function initParticles() {
+                const canvas = document.getElementById('particles-canvas');
+                
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                // Create particles
+                const particleCount = 100;
+                particleGeometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+                const velocities = new Float32Array(particleCount * 3);
+
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 10;
+                    positions[i + 1] = (Math.random() - 0.5) * 10;
+                    positions[i + 2] = (Math.random() - 0.5) * 10;
+                    
+                    velocities[i] = (Math.random() - 0.5) * 0.02;
+                    velocities[i + 1] = (Math.random() - 0.5) * 0.02;
+                    velocities[i + 2] = (Math.random() - 0.5) * 0.02;
+                }
+
+                particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                particleGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
+
+                particleMaterial = new THREE.PointsMaterial({
+                    color: 0x06B6D4,
+                    size: 0.05,
+                    transparent: true,
+                    opacity: 0.6
+                });
+
+                particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+                scene.add(particleSystem);
+
+                camera.position.z = 5;
+
+                animate();
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Animate particles
+                const positions = particleGeometry.attributes.position.array;
+                const velocities = particleGeometry.attributes.velocity.array;
+
+                for (let i = 0; i < positions.length; i += 3) {
+                    positions[i] += velocities[i];
+                    positions[i + 1] += velocities[i + 1];
+                    positions[i + 2] += velocities[i + 2];
+
+                    // Reset particles that go too far
+                    if (Math.abs(positions[i]) > 5) velocities[i] *= -1;
+                    if (Math.abs(positions[i + 1]) > 5) velocities[i + 1] *= -1;
+                    if (Math.abs(positions[i + 2]) > 5) velocities[i + 2] *= -1;
+                }
+
+                particleGeometry.attributes.position.needsUpdate = true;
+                particleSystem.rotation.y += 0.002;
+
+                renderer.render(scene, camera);
+            }
+
+            // 3D Hero Objects
+            function init3DHero() {
+                const container = document.getElementById('three-container');
+                const heroScene = new THREE.Scene();
+                const heroCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const heroRenderer = new THREE.WebGLRenderer({ alpha: true });
+                
+                heroRenderer.setSize(window.innerWidth, window.innerHeight);
+                container.appendChild(heroRenderer.domElement);
+
+                // Create floating geometries
+                const geometries = [
+                    new THREE.BoxGeometry(1, 1, 1),
+                    new THREE.SphereGeometry(0.7, 32, 32),
+                    new THREE.ConeGeometry(0.5, 1.5, 8),
+                    new THREE.TorusGeometry(0.6, 0.2, 16, 100)
+                ];
+
+                const materials = [
+                    new THREE.MeshBasicMaterial({ color: 0x06B6D4, wireframe: true }),
+                    new THREE.MeshBasicMaterial({ color: 0x8B5CF6, wireframe: true }),
+                    new THREE.MeshBasicMaterial({ color: 0x10B981, wireframe: true }),
+                    new THREE.MeshBasicMaterial({ color: 0xF59E0B, wireframe: true })
+                ];
+
+                const meshes = [];
+                for (let i = 0; i < 4; i++) {
+                    const mesh = new THREE.Mesh(geometries[i], materials[i]);
+                    mesh.position.x = (Math.random() - 0.5) * 10;
+                    mesh.position.y = (Math.random() - 0.5) * 6;
+                    mesh.position.z = (Math.random() - 0.5) * 5;
+                    heroScene.add(mesh);
+                    meshes.push(mesh);
+                }
+
+                heroCamera.position.z = 8;
+
+                function animateHero() {
+                    requestAnimationFrame(animateHero);
+
+                    meshes.forEach((mesh, index) => {
+                        mesh.rotation.x += 0.01;
+                        mesh.rotation.y += 0.01;
+                        mesh.position.y += Math.sin(Date.now() * 0.001 + index) * 0.01;
+                    });
+
+                    heroRenderer.render(heroScene, heroCamera);
+                }
+
+                animateHero();
+            }
+
+            // Smooth scrolling
+            function initSmoothScrolling() {
+                const links = document.querySelectorAll('a[href^="#"]');
+                
+                links.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetSection = document.querySelector(targetId);
+                        
+                        if (targetSection) {
+                            targetSection.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Intersection Observer for animations
+            function initScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all sections
+                const sections = document.querySelectorAll('section');
+                sections.forEach(section => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(50px)';
+                    section.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                    observer.observe(section);
+                });
+            }
+
+            // Contact form handling
+            function initContactForm() {
+                const form = document.querySelector('#contact form');
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement form submission logic
+                    alert('Thank you for your message! I\'ll get back to you soon.');
+                });
+            }
+
+            // Handle window resize
+            function handleResize() {
+                if (camera && renderer) {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                }
+            }
+
+            // Initialize everything
+            window.addEventListener('load', function() {
+                initParticles();
+                init3DHero();
+                initSmoothScrolling();
+                initScrollAnimations();
+                initContactForm();
+            });
+
+            window.addEventListener('resize', handleResize);
+
+            // Skill progress animation
+            function animateSkillBars() {
+                const skillBars = document.querySelectorAll('.skill-progress');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const bar = entry.target;
+                            const width = bar.style.width || bar.className.match(/w-\[(\d+)%\]/)?.[1] + '%';
+                            bar.style.width = '0%';
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 200);
+                        }
+                    });
+                });
+
+                skillBars.forEach(bar => observer.observe(bar));
+            }
+
+            // Initialize skill bar animations
+            window.addEventListener('load', animateSkillBars);
+        })();
+    </script>
+</body>
+</html>
