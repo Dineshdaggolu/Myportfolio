@@ -58,15 +58,15 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  // Start the server on IPv4 to avoid ENOTSUP on ::1
+  // Render needs the server to bind to 0.0.0.0, not 127.0.0.1
   const port = parseInt(process.env.PORT || '5000', 10);
+  const host = process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1";
+
   server.listen(
-    {
-      port,
-      host: "127.0.0.1", // ✅ Fix for ENOTSUP error on Windows
-    },
+    { port, host },
     () => {
-      log(`Serving on http://127.0.0.1:${port}`);
+      log(`🚀 Server running at http://${host}:${port}`);
     }
   );
 })();
+
